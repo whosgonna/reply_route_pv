@@ -1,0 +1,35 @@
+services:
+
+    proxy:
+        build: ./
+        volumes:
+            - ./proxy:/etc/kamailio
+        entrypoint: ["kamailio", "-ddDDeE", "-M", "4", "-m", "16", "-n", "1" ]
+        environment:
+          - TERM=screen
+        restart: on-failure
+
+    uac:
+        build:
+            context: uac
+        volumes:
+            - ./uac:/uac
+        working_dir: /uac
+        tty: true
+        stop_signal: SIGKILL
+
+    target1:
+        build: ./
+        volumes:
+            - ./target1:/etc/kamailio
+        entrypoint: ["kamailio", "-ddDDeE", "-M", "4", "-m", "16", "-n", "1" ]
+        restart: on-failure
+
+    target2:
+        build: ./
+        volumes:
+            - ./target2:/etc/kamailio
+        entrypoint: ["kamailio", "-ddDDeE", "-M", "4", "-m", "16", "-n", "1" ]
+        restart: on-failure
+
+
