@@ -4,7 +4,7 @@ services:
         build: ./
         volumes:
             - ./proxy:/etc/kamailio
-        entrypoint: ["kamailio", "-ddDDeE", "-M", "4", "-m", "16", "-n", "1" ]
+        entrypoint: ["kamailio", "-ddDDeE", "-M", "4", "-m", "16" ]
         environment:
           - TERM=screen
         restart: on-failure
